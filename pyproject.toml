@@ -1,0 +1,82 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tokensage"
+version = "1.0.0"
+description = "轻量级LLM上下文令牌优化引擎 | Lightweight LLM Context Token Optimization Engine"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [
+    {name = "TokenSage Team"},
+]
+keywords = ["llm", "token", "compression", "context", "ai-agent", "claude", "gpt"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Scientific :: Artificial Intelligence",
+]
+
+dependencies = [
+    "click>=8.0",
+    "rich>=13.0",
+    "httpx>=0.24.0",
+    "pyyaml>=6.0",
+    "jinja2>=3.0",
+]
+
+[project.optional-dependencies]
+all = [
+    "tokensage[proxy,ui,dev]",
+]
+proxy = [
+    "uvicorn>=0.20.0",
+    "starlette>=0.27.0",
+]
+ui = [
+    "textual>=0.40.0",
+]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "black>=23.0",
+    "ruff>=0.1.0",
+    "mypy>=1.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/gitstq/TokenSage-CLI"
+Repository = "https://github.com/gitstq/TokenSage-CLI"
+Documentation = "https://github.com/gitstq/TokenSage-CLI#readme"
+
+[project.scripts]
+tokensage = "tokensage.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["tokensage*"]
+
+[tool.black]
+line-length = 100
+target-version = ["py310", "py311", "py312"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "N"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
